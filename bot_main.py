@@ -163,4 +163,4 @@ async def en(ctx):
 
     await ctx.send(embed=minha_embed, file=Imagem)
 
-bot.run(TOKEN)
+bots.run(TOKEN)
