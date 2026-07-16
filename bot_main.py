@@ -153,7 +153,7 @@ async def bom_dia_task():
     canal_c = bots.get_channel(1522863442417942588)
 
     minha_embed = discord.Embed()
-    minha_embed.title = "@everyone já sao 6 da manha Bora corda"
+    minha_embed.title = "Já são 6 da manhã, bora acordar!"
     minha_embed.description = ""
 
     Imagem = discord.File("bom_dia.jpg",filename="bom_a.jpg")
@@ -161,7 +161,7 @@ async def bom_dia_task():
     minha_embed.set_footer(text="Bom dia rapaziada😘")
     minha_embed.set_author(name="sae",icon_url="https://pbs.twimg.com/media/HCbPdWpX0AAhVtW.jpg")
 
-    await canal_c.send(embed=minha_embed, file=Imagem, allowed_mentions=discord.AllowedMentions(everyone=True))
+    await canal_c.send(content="@everyone",embed=minha_embed, file=Imagem, allowed_mentions=discord.AllowedMentions(everyone=True))
 
 @bots.command()
 async def bn(ctx):
