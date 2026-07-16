@@ -59,7 +59,7 @@ async def on_member_join(member):
 
 @bots.command(aliases=["bom dia"])
 async def bom_dia(ctx:commands.Context):
-    fala = random.choice(["bom dia neguin","nem começou o dia ja estou triste de ter que ver voce","mal dia", "..."])
+    fala = random.choice(["bom dia neguin","aea mano bom dia","qual foi bom dia", "eu vou ter um bom dia"])
     await ctx.reply(f"{fala} 😑")
     return
 
@@ -146,7 +146,7 @@ async def enviar_mensagem():
     canal = bots.get_channel(1522863442417942588)
     await canal.send("Bom-dia!")
 
-@bots.command()
+@tasks.loop(time=time(9,30))
 async def bn(ctx):
     canal_c = 1522863442417942588
     if ctx.channel.id != canal_c:
@@ -160,6 +160,10 @@ async def bn(ctx):
     minha_embed.set_footer(text="Bom dia rapaziada😘")
     minha_embed.set_author(name="sae",icon_url="https://pbs.twimg.com/media/HCbPdWpX0AAhVtW.jpg")
 
-    await ctx.send(embed=minha_embed, file=Imagem)
+    await ctx.send(embed=minha_embed, file=Imagem, allowed_mentions=discord.AllowedMentions(users=True))
+
+@bot.command()
+async def bn(ctx):
+    await minha_task()
 
 bots.run(TOKEN)
