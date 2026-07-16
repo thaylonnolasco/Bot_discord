@@ -176,7 +176,7 @@ async def ticket(ctx):
         await ctx.send("Tempo esgotado.")
         return
 
-    canal = bots.get_channel(CANAL_TICKETS)
+    canal = bots.get_channel(883198811441344552)
 
     embed = discord.Embed(
         title="Novo Ticket",
