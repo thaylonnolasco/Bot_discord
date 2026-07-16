@@ -61,7 +61,7 @@ async def on_member_join(member):
 
 @bots.command(aliases=["bom dia"])
 async def bom_dia(ctx:commands.Context):
-    fala = random.choice(["bom dia neguin","aea mano bom dia","qual foi bom dia", "eu vou ter um bom dia"])
+    fala = random.choice(["bom dia neguin","eae mano bom dia","qual foi bom dia", "eu vou ter um bom dia"])
     await ctx.reply(f"{fala} 😑")
     return
 
@@ -163,8 +163,39 @@ async def bom_dia_task():
 
     await canal_c.send(content="@everyone",embed=minha_embed, file=Imagem, allowed_mentions=discord.AllowedMentions(everyone=True))
 
-@bots.command()
-async def bn(ctx):
-    await bom_dia_task()
+@bot.command()
+async def ticket(ctx):
+    await ctx.send("Descreva seu problema.")
+
+    def check(msg):
+        return msg.author == ctx.author and msg.channel == ctx.channel
+
+    try:
+        resposta = await bot.wait_for("message", check=check, timeout=300)
+    except:
+        await ctx.send("Tempo esgotado.")
+        return
+
+    canal = bot.get_channel(CANAL_TICKETS)
+
+    embed = discord.Embed(
+        title="Novo Ticket",
+        color=discord.Color.green()
+    )
+
+    embed.add_field(
+        name="Usuário",
+        value=f"{ctx.author} ({ctx.author.id})",
+        inline=False
+    )
+
+    embed.add_field(
+        name="Mensagem",
+        value=resposta.content,
+        inline=False
+    )
+
+    await canal.send(embed=embed)
+    await ctx.send("Seu ticket foi enviado!")
 
 bots.run(TOKEN)
