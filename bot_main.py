@@ -176,26 +176,34 @@ async def ticket(ctx):
         await ctx.send("Tempo esgotado.")
         return
 
-    canal = bots.get_channel(883198811441344552)
+MEU_ID = 1527459280456913077
 
-    embed = discord.Embed(
-        title="Novo Ticket",
-        color=discord.Color.green()
-    )
+embed = discord.Embed(
+    title="📩 Novo Ticket",
+    color=discord.Color.green()
+)
 
-    embed.add_field(
-        name="Usuário",
-        value=f"{ctx.author} ({ctx.author.id})",
-        inline=False
-    )
+embed.add_field(
+    name="Usuário",
+    value=f"{ctx.author.mention}\n{ctx.author} ({ctx.author.id})",
+    inline=False
+)
 
-    embed.add_field(
-        name="Mensagem",
-        value=resposta.content,
-        inline=False
-    )
+embed.add_field(
+    name="Servidor",
+    value=ctx.guild.name,
+    inline=False
+)
 
-    await canal.send(embed=embed)
-    await ctx.send("Seu ticket foi enviado!")
+embed.add_field(
+    name="Mensagem",
+    value=resposta.content,
+    inline=False
+)
+
+usuario = await bots.fetch_user(MEU_ID)
+await usuario.send(embed=embed)
+
+await ctx.send("✅ Seu ticket foi enviado!")
 
 bots.run(TOKEN)
