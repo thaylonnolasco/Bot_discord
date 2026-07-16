@@ -163,7 +163,7 @@ async def bom_dia_task():
 
     await canal_c.send(content="@everyone",embed=minha_embed, file=Imagem, allowed_mentions=discord.AllowedMentions(everyone=True))
 
-@bot.command()
+@bots.command()
 async def ticket(ctx):
     await ctx.send("Descreva seu problema.")
 
