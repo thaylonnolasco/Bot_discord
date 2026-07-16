@@ -147,18 +147,17 @@ async def enviar_mensagem():
     await canal.send("Bom-dia!")
 
 @bots.command()
-async def en(ctx):
+async def bn(ctx):
     canal_c = 1522863442417942588
     if ctx.channel.id != canal_c:
         return
     minha_embed = discord.Embed()
-    minha_embed.title = "já sao 6 da manha"
+    minha_embed.title = "@everyone já sao 6 da manha Bora corda"
     minha_embed.description = ""
 
     Imagem = discord.File("bom_dia.jpg",filename="bom_a.jpg")
     minha_embed.set_image(url="attachment://bom_a.jpg")
-    minha_embed.set_thumbnail(url="attachment://bom_a.jpg")
-    minha_embed.set_footer(text="Bom dia rapaziada")
+    minha_embed.set_footer(text="Bom dia rapaziada😘")
     minha_embed.set_author(name="sae",icon_url="https://pbs.twimg.com/media/HCbPdWpX0AAhVtW.jpg")
 
     await ctx.send(embed=minha_embed, file=Imagem)
