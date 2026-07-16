@@ -171,12 +171,12 @@ async def ticket(ctx):
         return msg.author == ctx.author and msg.channel == ctx.channel
 
     try:
-        resposta = await bot.wait_for("message", check=check, timeout=300)
+        resposta = await bots.wait_for("message", check=check, timeout=300)
     except:
         await ctx.send("Tempo esgotado.")
         return
 
-    canal = bot.get_channel(CANAL_TICKETS)
+    canal = bots.get_channel(CANAL_TICKETS)
 
     embed = discord.Embed(
         title="Novo Ticket",
