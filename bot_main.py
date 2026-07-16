@@ -6,6 +6,7 @@ from datetime import time
 import os
 
 TOKEN = os.getenv("TOKEN")
+MEU_ID = 1527459280456913077
 
 hoje = datetime.now()
 
@@ -140,7 +141,7 @@ async def bot(ctx):
 
 @bots.command()
 async def dia(ctx):
-    await ctx.channel.send(f"hoje é {dia_semana}, {hoje.strftime('%d/%m')} é  agora são {agora.strftime("%H:%M")} ")
+    await ctx.channel.send(f"hoje é {dia_semana}, {hoje.strftime('%d/%m')} é  agora são {agora.strftime('%H:%M')} ")
     return
 
 @tasks.loop(time=time(9,29))
@@ -164,7 +165,7 @@ async def bom_dia_task():
     await canal_c.send(content="@everyone",embed=minha_embed, file=Imagem, allowed_mentions=discord.AllowedMentions(everyone=True))
 
 @bots.command()
-async def ticket(ctx):
+async def tk(ctx):
     await ctx.send("Descreva seu problema.")
 
     def check(msg):
@@ -175,35 +176,33 @@ async def ticket(ctx):
     except:
         await ctx.send("Tempo esgotado.")
         return
-
-MEU_ID = 1527459280456913077
-
-embed = discord.Embed(
+        
+    embed = discord.Embed(
     title="📩 Novo Ticket",
     color=discord.Color.green()
-)
+    )
 
-embed.add_field(
+    embed.add_field(
     name="Usuário",
     value=f"{ctx.author.mention}\n{ctx.author} ({ctx.author.id})",
     inline=False
-)
+    )
 
-embed.add_field(
+    embed.add_field(
     name="Servidor",
     value=ctx.guild.name,
     inline=False
-)
+    )
 
-embed.add_field(
-    name="Mensagem",
-    value=resposta.content,
-    inline=False
-)
+    embed.add_field(
+        name="Mensagem",
+        value=resposta.content,
+        inline=False
+    )
 
-usuario = await bots.fetch_user(MEU_ID)
-await usuario.send(embed=embed)
+    usuario = await bots.fetch_user(MEU_ID)
+    await usuario.send(embed=embed)
 
-await ctx.send("✅ Seu ticket foi enviado!")
+    await ctx.send("✅ Seu ticket foi enviado!")
 
 bots.run(TOKEN)
