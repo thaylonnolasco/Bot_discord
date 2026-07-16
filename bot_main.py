@@ -30,6 +30,8 @@ bots = commands.Bot(command_prefix="!", intents=intents)
 @bots.event
 async def on_ready():
     enviar_mensagem.start()
+    if not bom_dia_task.is_running():
+        bom_dia_task.start()
     print("bot funcionando")
 
 @bots.event
@@ -141,16 +143,15 @@ async def dia(ctx):
     await ctx.channel.send(f"hoje é {dia_semana}, {hoje.strftime('%d/%m')} é  agora são {agora.strftime("%H:%M")} ")
     return
 
-@tasks.loop(time=time(9,30))
+@tasks.loop(time=time(9,29))
 async def enviar_mensagem():
     canal = bots.get_channel(1522863442417942588)
     await canal.send("Bom-dia!")
 
 @tasks.loop(time=time(9,30))
-async def bn(ctx):
-    canal_c = 1522863442417942588
-    if ctx.channel.id != canal_c:
-        return
+async def bom_dia_task():
+    canal_c = bots.get_channel(1522863442417942588)
+
     minha_embed = discord.Embed()
     minha_embed.title = "@everyone já sao 6 da manha Bora corda"
     minha_embed.description = ""
@@ -160,10 +161,10 @@ async def bn(ctx):
     minha_embed.set_footer(text="Bom dia rapaziada😘")
     minha_embed.set_author(name="sae",icon_url="https://pbs.twimg.com/media/HCbPdWpX0AAhVtW.jpg")
 
-    await ctx.send(embed=minha_embed, file=Imagem, allowed_mentions=discord.AllowedMentions(users=True))
+    await canal_c.send(embed=minha_embed, file=Imagem, allowed_mentions=discord.AllowedMentions(everyone=True))
 
-@bot.command()
+@bots.command()
 async def bn(ctx):
-    await minha_task()
+    await bom_dia_task()
 
 bots.run(TOKEN)
