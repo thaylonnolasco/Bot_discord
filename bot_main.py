@@ -4,9 +4,10 @@ import random
 from datetime import  datetime
 from datetime import time 
 import os
+import traceback
 
 TOKEN = os.getenv("TOKEN")
-MEU_ID = 1527459280456913077
+MEU_ID = 883198811441344552
 
 hoje = datetime.now()
 
@@ -166,6 +167,7 @@ async def bom_dia_task():
 
 @bots.command()
 async def tk(ctx):
+    canal_p = bots.get_channel(1522211118272217169)
     await ctx.send("Descreva seu problema.")
 
     def check(msg):
@@ -173,8 +175,9 @@ async def tk(ctx):
 
     try:
         resposta = await bots.wait_for("message", check=check, timeout=300)
-    except:
-        await ctx.send("Tempo esgotado.")
+    except Exception as e:
+        traceback.print_exc()
+        await ctx.send(f"Erro: {e}")
         return
         
     embed = discord.Embed(
@@ -199,10 +202,14 @@ async def tk(ctx):
         value=resposta.content,
         inline=False
     )
-
     usuario = await bots.fetch_user(MEU_ID)
     await usuario.send(embed=embed)
-
+    
+    if canal_p is None:
+        print("Canal não encontrado!")
+    else:
+        await canal_p.send(embed=embed)
+        
     await ctx.send("✅ Seu ticket foi enviado!")
 
 bots.run(TOKEN)
