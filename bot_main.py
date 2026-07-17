@@ -8,6 +8,7 @@ import traceback
 
 TOKEN = os.getenv("TOKEN")
 MEU_ID = 883198811441344552
+Ticket = 1522211118272217169
 
 hoje = datetime.now()
 
@@ -167,6 +168,9 @@ async def bom_dia_task():
 
 @bots.command()
 async def tk(ctx):
+    
+    if ctx.channel.id != Ticket:
+            return
     canal_p = bots.get_channel(1522211118272217169)
     await ctx.send("Descreva seu problema.")
 
@@ -182,18 +186,12 @@ async def tk(ctx):
         
     embed = discord.Embed(
     title="📩 Novo Ticket",
-    color=discord.Color.green()
+    color=discord.Color.purple()
     )
 
     embed.add_field(
     name="Usuário",
-    value=f"{ctx.author.mention}\n{ctx.author} ({ctx.author.id})",
-    inline=False
-    )
-
-    embed.add_field(
-    name="Servidor",
-    value=ctx.guild.name,
+    value=f"{ctx.author.mention}\n{ctx.author}",
     inline=False
     )
 
@@ -210,6 +208,6 @@ async def tk(ctx):
     else:
         await canal_p.send(embed=embed)
         
-    await ctx.send("✅ Seu ticket foi enviado!")
+    await ctx.send("Seu ticket foi enviado!")
 
 bots.run(TOKEN)
