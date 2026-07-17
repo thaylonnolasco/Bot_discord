@@ -172,7 +172,7 @@ async def tk(ctx):
     if ctx.channel.id != Ticket:
             return
     canal_p = bots.get_channel(1522211118272217169)
-    await ctx.send("Descreva seu problema.")
+    await ctx.send("Descreva sua melhoria.")
 
     def check(msg):
         return msg.author == ctx.author and msg.channel == ctx.channel
