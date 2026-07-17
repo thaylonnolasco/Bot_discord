@@ -7,7 +7,6 @@ import os
 import traceback
 
 TOKEN = os.getenv("TOKEN")
-MEU_ID = 883198811441344552
 Ticket = 1522211118272217169
 
 hoje = datetime.now()
@@ -200,14 +199,8 @@ async def tk(ctx):
         value=resposta.content,
         inline=False
     )
-    usuario = await bots.fetch_user(MEU_ID)
-    await usuario.send(embed=embed)
-    
-    if canal_p is None:
-        print("Canal não encontrado!")
-    else:
-        await canal_p.send(embed=embed)
-        
+    canal_n = bots.get_channel(1527475448013918308)
+    await canal_n.send(embed=embed)
     await ctx.send("Seu ticket foi enviado!")
 
 bots.run(TOKEN)
