@@ -66,6 +66,10 @@ async def bom_dia(ctx:commands.Context):
     fala = random.choice(["bom dia neguin","eae mano bom dia","qual foi bom dia", "eu vou ter um bom dia"])
     await ctx.reply(f"{fala} 😑")
     return
+@bots.comand()
+async def espanha(ctx:commands.Context):
+    falas = random.choice(["ganahram por sorte","o bunny ganhou no banco","jogaram um pouco","argentina jogo ruim de mais"])
+    await ctx.send(f"{falas}")
 
 @bots.command()
 async def oi(ctx):
